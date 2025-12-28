@@ -1,5 +1,5 @@
 namespace SpriteKind {
-    export const House = SpriteKind.create()
+    export const arbol = SpriteKind.create()
     export const NPC = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -10,6 +10,12 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
+function crear_arbol () {
+    x = randint(0, 130)
+    y = randint(50, 110)
+    num_arboles += 1
+    ArbolDeNavidad.setPosition(x, y)
+}
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     nena,
@@ -26,6 +32,12 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
+function talar_arbol () {
+    ArbolDeNavidad.setFlag(SpriteFlag.Invisible, true)
+    ArbolDeNavidad.setFlag(SpriteFlag.Ghost, true)
+    info.changeScoreBy(1)
+    crear_arbol()
+}
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     nena,
@@ -34,7 +46,16 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.arbol, function (sprite, otherSprite) {
+    ArbolDeNavidad.sayText("Botón A talar", 500, false)
+    if (controller.A.isPressed()) {
+        talar_arbol()
+    }
+})
+let y = 0
+let x = 0
 let troncos = 0
+let ArbolDeNavidad: Sprite = null
 let nena: Sprite = null
 scene.setBackgroundImage(img`
     8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
@@ -178,7 +199,7 @@ let Vendedor = sprites.create(img`
     . . . f f 1 d 1 d 1 d f f . . . 
     . . . . . f f b b f f . . . . . 
     `, SpriteKind.NPC)
-let ArbolDeNavidad = sprites.create(img`
+ArbolDeNavidad = sprites.create(img`
     ......cc5c......
     .....c6555c.....
     ....c675556c....
@@ -203,10 +224,18 @@ let ArbolDeNavidad = sprites.create(img`
     ......eeee......
     .....eeeeee.....
     .......ee.......
-    `, SpriteKind.House)
-let menu = 0
+    `, SpriteKind.arbol)
 info.setScore(troncos)
+troncos = 0
+let patatas = 0
+let huevos = 0
+let gallinas = 0
+let cabras = 0
+let caballos = 0
+let num_arboles = 0
+let sobreArbol = false
+let talando = false
 nena.setStayInScreen(true)
 nena.setPosition(10, 93)
 Vendedor.setPosition(142, 96)
-ArbolDeNavidad.setPosition(30, 68)
+crear_arbol()
