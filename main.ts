@@ -10,10 +10,181 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSprite) {
+    Vendedor.sayText("Comprar (A)", 500, false)
+    if (controller.A.isPressed() && menu == 0) {
+        menu = 1
+        lista = miniMenu.createMenu(
+        miniMenu.createMenuItem("Gallina", img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . b 5 5 b . . . 
+            . . . . . . b b b b b b . . . . 
+            . . . . . b b 5 5 5 5 5 b . . . 
+            . b b b b b 5 5 5 5 5 5 5 b . . 
+            . b d 5 b 5 5 5 5 5 5 5 5 b . . 
+            . . b 5 5 b 5 d 1 f 5 d 4 f . . 
+            . . b d 5 5 b 1 f f 5 4 4 c . . 
+            b b d b 5 5 5 d f b 4 4 4 4 b . 
+            b d d c d 5 5 b 5 4 4 4 4 4 4 b 
+            c d d d c c b 5 5 5 5 5 5 5 b . 
+            c b d d d d d 5 5 5 5 5 5 5 b . 
+            . c d d d d d d 5 5 5 5 5 d b . 
+            . . c b d d d d d 5 5 5 b b . . 
+            . . . c c c c c c c c b b . . . 
+            `),
+        miniMenu.createMenuItem("Patata", img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . 4 4 4 4 4 . . . . . . 
+            . . . 4 4 4 5 5 5 d 4 4 4 4 . . 
+            . . 4 d 5 d 5 5 5 d d d 4 4 . . 
+            . . 4 5 5 1 1 1 d d 5 5 5 4 . . 
+            . 4 5 5 5 1 1 1 5 1 1 5 5 4 4 . 
+            . 4 d d 1 1 5 5 5 1 1 5 5 d 4 . 
+            . 4 5 5 1 1 5 1 1 5 5 d d d 4 . 
+            . 2 5 5 5 d 1 1 1 5 1 1 5 5 2 . 
+            . 2 d 5 5 d 1 1 1 5 1 1 5 5 2 . 
+            . . 2 4 d d 5 5 5 5 d d 5 4 . . 
+            . . . 2 2 4 d 5 5 d d 4 4 . . . 
+            . . 2 2 2 2 2 4 4 4 2 2 2 . . . 
+            . . . 2 2 4 4 4 4 4 4 2 2 . . . 
+            . . . . . 2 2 2 2 2 2 . . . . . 
+            `),
+        miniMenu.createMenuItem("Cabra", img`
+            ........................
+            ........................
+            ........................
+            ........................
+            ..........ffff..........
+            ........ff1111ff........
+            .......fb111111bf.......
+            .......f11111111f.......
+            ......fd11111111df......
+            ......fd11111111df......
+            ......fddd1111dddf......
+            ......fbdbfddfbdbf......
+            ......fcdcf11fcdcf......
+            .......fb111111bf.......
+            ......fffcdb1bdffff.....
+            ....fc111cbfbfc111cf....
+            ....f1b1b1ffff1b1b1f....
+            ....fbfbffffffbfbfbf....
+            .........ffffff.........
+            ...........fff..........
+            ........................
+            ........................
+            ........................
+            ........................
+            `),
+        miniMenu.createMenuItem("Huevos", img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . b b b b . . . . . . 
+            . . . . b b 1 1 1 1 b b . . . . 
+            . . . . b 1 1 1 3 3 1 b . . . . 
+            . . . b 1 1 1 1 3 3 3 1 b . . . 
+            . . . b 1 1 3 1 1 3 3 1 b . . . 
+            . . b d 1 1 1 1 1 1 1 1 d b . . 
+            . . b d 3 3 1 1 1 1 1 1 d b . . 
+            . . b b 3 3 1 1 1 1 3 3 d b . . 
+            . . c b b d 1 1 1 3 3 b d c . . 
+            . . c d d d d d d b b b d c . . 
+            . . c b d d b b d b b d b c . . 
+            . . . c d d b b d d d d c . . . 
+            . . . . c b d d d d b c . . . . 
+            . . . . . c c c c c c . . . . . 
+            `),
+        miniMenu.createMenuItem("Caballos", img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . 6 6 6 6 6 6 6 6 . . 
+            . . . . . 6 c 6 6 6 6 6 6 9 6 . 
+            . . . . 6 c c 6 6 6 6 6 6 9 c 6 
+            . . d 6 9 c c 6 9 9 9 9 9 9 c c 
+            . d 6 6 9 c b 8 8 8 8 8 8 8 6 c 
+            . 6 6 6 9 b 8 8 b b b 8 b b 8 6 
+            . 6 6 6 6 6 8 b b b b 8 b b b 8 
+            . 6 6 6 6 8 6 6 6 6 6 8 6 6 6 8 
+            . 6 d d 6 8 f 8 8 8 f 8 8 8 8 8 
+            . d d 6 8 8 8 f 8 8 f 8 8 8 8 8 
+            . 8 8 8 8 8 8 8 f f f 8 8 8 8 8 
+            . 8 8 8 8 f f f 8 8 8 8 f f f f 
+            . . . 8 f f f f f 8 8 f f f f f 
+            . . . . f f f f . . . . f f f . 
+            . . . . . . . . . . . . . . . . 
+            `),
+        miniMenu.createMenuItem("Salir", img`
+            ...........fffffff...ccfff..........
+            ..........fbbbbbbbffcbbbbf..........
+            ..........fbb111bbbbbffbf...........
+            ..........fb11111ffbbbbff...........
+            ..........f1cccc1ffbbbbbcff.........
+            ..........ffc1c1c1bbcbcbcccf........
+            ...........fcc3331bbbcbcbcccf..ccccc
+            ............c333c1bbbcbcbccccfcddbbc
+            ............c333c1bbbbbbbcccccddbcc.
+            ............c333c11bbbbbccccccbbcc..
+            ...........cc331c11bbbbccccccfbccf..
+            ...........cc13c11cbbbcccccbbcfccf..
+            ...........c111111cbbbfdddddc.fbbcf.
+            ............cc1111fbdbbfdddc...fbbf.
+            ..............cccfffbdbbfcc.....fbbf
+            ....................fffff........fff
+            `)
+        )
+        lista.onButtonPressed(controller.A, function (selection, selectedIndex) {
+            if (selectedIndex == 0) {
+                precio_actual = 6
+                producto_actual = selection
+            } else if (selectedIndex == 1) {
+                precio_actual = 2
+                producto_actual = selection
+            } else if (selectedIndex == 2) {
+                precio_actual = 5
+                producto_actual = selection
+            } else if (selectedIndex == 3) {
+                precio_actual = 3
+                producto_actual = selection
+            } else if (selectedIndex == 4) {
+                precio_actual = 12
+                producto_actual = selection
+            }
+            if (info.score() >= precio_actual) {
+                if (selectedIndex == 0) {
+                    comprar(6)
+                    gallinas += 1
+                } else if (selectedIndex == 1) {
+                    comprar(2)
+                    patatas += 1
+                } else if (selectedIndex == 2) {
+                    comprar(5)
+                    cabras += 1
+                } else if (selectedIndex == 3) {
+                    comprar(3)
+                    huevos += 1
+                } else if (selectedIndex == 4) {
+                    comprar(12)
+                    caballos += 1
+                } else {
+                    lista.close()
+                    menu = 0
+                }
+            } else {
+                game.splash("No tienes suficiente madera")
+                lista.close()
+                menu = 0
+            }
+        })
+    }
+})
 function crear_arbol () {
     x = randint(0, 130)
     y = randint(50, 110)
     num_arboles += 1
+    timer.after(900, function () {
+        ArbolDeNavidad.setFlag(SpriteFlag.Invisible, false)
+        ArbolDeNavidad.setFlag(SpriteFlag.Ghost, false)
+    })
     ArbolDeNavidad.setPosition(x, y)
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -24,6 +195,12 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
+function comprar (num: number) {
+    info.changeScoreBy(num * -1)
+    game.splash("Compra realizada")
+    lista.close()
+    menu = 0
+}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     nena,
@@ -33,10 +210,10 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     )
 })
 function talar_arbol () {
+    ArbolDeNavidad.startEffect(effects.ashes, 100)
     ArbolDeNavidad.setFlag(SpriteFlag.Invisible, true)
     ArbolDeNavidad.setFlag(SpriteFlag.Ghost, true)
     info.changeScoreBy(1)
-    crear_arbol()
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -46,17 +223,32 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.arbol, function (sprite, otherSprite) {
-    ArbolDeNavidad.sayText("Botón A talar", 500, false)
+sprites.onOverlap(SpriteKind.Player, SpriteKind.arbol, function (sprite2, otherSprite2) {
+    ArbolDeNavidad.sayText("Talar (A)", 500, false)
     if (controller.A.isPressed()) {
         talar_arbol()
+        if (otherSprite2 == ArbolDeNavidad) {
+            crear_arbol()
+        }
     }
 })
 let y = 0
 let x = 0
+let lista: miniMenu.MenuSprite = null
+let menu = 0
+let precio_actual = 0
+let producto_actual = ""
 let troncos = 0
 let ArbolDeNavidad: Sprite = null
+let Vendedor: Sprite = null
 let nena: Sprite = null
+let talando = false
+let sobreArbol = false
+let caballos = 0
+let cabras = 0
+let gallinas = 0
+let huevos = 0
+let patatas = 0
 scene.setBackgroundImage(img`
     8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
     8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
@@ -181,7 +373,7 @@ scene.setBackgroundImage(img`
     `)
 nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
 controller.moveSprite(nena)
-let Vendedor = sprites.create(img`
+Vendedor = sprites.create(img`
     . . . . . f f 4 4 f f . . . . . 
     . . . . f 5 4 5 5 4 5 f . . . . 
     . . . f e 4 5 5 5 5 4 e f . . . 
@@ -227,14 +419,10 @@ ArbolDeNavidad = sprites.create(img`
     `, SpriteKind.arbol)
 info.setScore(troncos)
 troncos = 0
-let patatas = 0
-let huevos = 0
-let gallinas = 0
-let cabras = 0
-let caballos = 0
 let num_arboles = 0
-let sobreArbol = false
-let talando = false
+producto_actual = ""
+precio_actual = 0
+menu = 0
 nena.setStayInScreen(true)
 nena.setPosition(10, 93)
 Vendedor.setPosition(142, 96)

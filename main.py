@@ -12,12 +12,187 @@ def on_up_pressed():
         False)
 controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
 
+def on_on_overlap(sprite, otherSprite):
+    global menu, lista
+    Vendedor.say_text("Comprar (A)", 500, False)
+    if controller.A.is_pressed() and menu == 0:
+        menu = 1
+        lista = miniMenu.create_menu(miniMenu.create_menu_item("Gallina",
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . b 5 5 b . . .
+                    . . . . . . b b b b b b . . . .
+                    . . . . . b b 5 5 5 5 5 b . . .
+                    . b b b b b 5 5 5 5 5 5 5 b . .
+                    . b d 5 b 5 5 5 5 5 5 5 5 b . .
+                    . . b 5 5 b 5 d 1 f 5 d 4 f . .
+                    . . b d 5 5 b 1 f f 5 4 4 c . .
+                    b b d b 5 5 5 d f b 4 4 4 4 b .
+                    b d d c d 5 5 b 5 4 4 4 4 4 4 b
+                    c d d d c c b 5 5 5 5 5 5 5 b .
+                    c b d d d d d 5 5 5 5 5 5 5 b .
+                    . c d d d d d d 5 5 5 5 5 d b .
+                    . . c b d d d d d 5 5 5 b b . .
+                    . . . c c c c c c c c b b . . .
+                    """)),
+            miniMenu.create_menu_item("Patata",
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . 4 4 4 4 4 . . . . . .
+                    . . . 4 4 4 5 5 5 d 4 4 4 4 . .
+                    . . 4 d 5 d 5 5 5 d d d 4 4 . .
+                    . . 4 5 5 1 1 1 d d 5 5 5 4 . .
+                    . 4 5 5 5 1 1 1 5 1 1 5 5 4 4 .
+                    . 4 d d 1 1 5 5 5 1 1 5 5 d 4 .
+                    . 4 5 5 1 1 5 1 1 5 5 d d d 4 .
+                    . 2 5 5 5 d 1 1 1 5 1 1 5 5 2 .
+                    . 2 d 5 5 d 1 1 1 5 1 1 5 5 2 .
+                    . . 2 4 d d 5 5 5 5 d d 5 4 . .
+                    . . . 2 2 4 d 5 5 d d 4 4 . . .
+                    . . 2 2 2 2 2 4 4 4 2 2 2 . . .
+                    . . . 2 2 4 4 4 4 4 4 2 2 . . .
+                    . . . . . 2 2 2 2 2 2 . . . . .
+                    """)),
+            miniMenu.create_menu_item("Cabra",
+                img("""
+                    ........................
+                    ........................
+                    ........................
+                    ........................
+                    ..........ffff..........
+                    ........ff1111ff........
+                    .......fb111111bf.......
+                    .......f11111111f.......
+                    ......fd11111111df......
+                    ......fd11111111df......
+                    ......fddd1111dddf......
+                    ......fbdbfddfbdbf......
+                    ......fcdcf11fcdcf......
+                    .......fb111111bf.......
+                    ......fffcdb1bdffff.....
+                    ....fc111cbfbfc111cf....
+                    ....f1b1b1ffff1b1b1f....
+                    ....fbfbffffffbfbfbf....
+                    .........ffffff.........
+                    ...........fff..........
+                    ........................
+                    ........................
+                    ........................
+                    ........................
+                    """)),
+            miniMenu.create_menu_item("Huevos",
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . b b b b . . . . . .
+                    . . . . b b 1 1 1 1 b b . . . .
+                    . . . . b 1 1 1 3 3 1 b . . . .
+                    . . . b 1 1 1 1 3 3 3 1 b . . .
+                    . . . b 1 1 3 1 1 3 3 1 b . . .
+                    . . b d 1 1 1 1 1 1 1 1 d b . .
+                    . . b d 3 3 1 1 1 1 1 1 d b . .
+                    . . b b 3 3 1 1 1 1 3 3 d b . .
+                    . . c b b d 1 1 1 3 3 b d c . .
+                    . . c d d d d d d b b b d c . .
+                    . . c b d d b b d b b d b c . .
+                    . . . c d d b b d d d d c . . .
+                    . . . . c b d d d d b c . . . .
+                    . . . . . c c c c c c . . . . .
+                    """)),
+            miniMenu.create_menu_item("Caballos",
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . 6 6 6 6 6 6 6 6 . .
+                    . . . . . 6 c 6 6 6 6 6 6 9 6 .
+                    . . . . 6 c c 6 6 6 6 6 6 9 c 6
+                    . . d 6 9 c c 6 9 9 9 9 9 9 c c
+                    . d 6 6 9 c b 8 8 8 8 8 8 8 6 c
+                    . 6 6 6 9 b 8 8 b b b 8 b b 8 6
+                    . 6 6 6 6 6 8 b b b b 8 b b b 8
+                    . 6 6 6 6 8 6 6 6 6 6 8 6 6 6 8
+                    . 6 d d 6 8 f 8 8 8 f 8 8 8 8 8
+                    . d d 6 8 8 8 f 8 8 f 8 8 8 8 8
+                    . 8 8 8 8 8 8 8 f f f 8 8 8 8 8
+                    . 8 8 8 8 f f f 8 8 8 8 f f f f
+                    . . . 8 f f f f f 8 8 f f f f f
+                    . . . . f f f f . . . . f f f .
+                    . . . . . . . . . . . . . . . .
+                    """)),
+            miniMenu.create_menu_item("Salir",
+                img("""
+                    ...........fffffff...ccfff..........
+                    ..........fbbbbbbbffcbbbbf..........
+                    ..........fbb111bbbbbffbf...........
+                    ..........fb11111ffbbbbff...........
+                    ..........f1cccc1ffbbbbbcff.........
+                    ..........ffc1c1c1bbcbcbcccf........
+                    ...........fcc3331bbbcbcbcccf..ccccc
+                    ............c333c1bbbcbcbccccfcddbbc
+                    ............c333c1bbbbbbbcccccddbcc.
+                    ............c333c11bbbbbccccccbbcc..
+                    ...........cc331c11bbbbccccccfbccf..
+                    ...........cc13c11cbbbcccccbbcfccf..
+                    ...........c111111cbbbfdddddc.fbbcf.
+                    ............cc1111fbdbbfdddc...fbbf.
+                    ..............cccfffbdbbfcc.....fbbf
+                    ....................fffff........fff
+                    """)))
+        
+        def on_button_pressed(selection, selectedIndex):
+            global precio_actual, producto_actual, gallinas, patatas, cabras, huevos, caballos
+            if selectedIndex == 0:
+                precio_actual = 6
+                producto_actual = selection
+            elif selectedIndex == 1:
+                precio_actual = 2
+                producto_actual = selection
+            elif selectedIndex == 2:
+                precio_actual = 5
+                producto_actual = selection
+            elif selectedIndex == 3:
+                precio_actual = 3
+                producto_actual = selection
+            elif selectedIndex == 4:
+                precio_actual = 12
+                producto_actual = selection
+            if info.score() >= precio_actual:
+                if selectedIndex == 0:
+                    gallinas += 1
+                    game.splash("Compra realizada")
+                elif selectedIndex == 1:
+                    patatas += 1
+                    game.splash("Compra realizada")
+                elif selectedIndex == 2:
+                    cabras += 1
+                    game.splash("Compra realizada")
+                elif selectedIndex == 3:
+                    huevos += 1
+                    game.splash("Compra realizada")
+                elif selectedIndex == 4:
+                    caballos += 1
+                    game.splash("Compra realizada")
+                else:
+                    lista.close()
+            else:
+                game.splash("No tienes suficiente madera")
+                lista.close()
+        lista.on_button_pressed(controller.A, on_button_pressed)
+        
+sprites.on_overlap(SpriteKind.player, SpriteKind.NPC, on_on_overlap)
+
 def crear_arbol():
     global x, y, num_arboles
-    pause(5000)
     x = randint(0, 130)
     y = randint(50, 110)
     num_arboles += 1
+    
+    def on_after():
+        ArbolDeNavidad.set_flag(SpriteFlag.INVISIBLE, False)
+        ArbolDeNavidad.set_flag(SpriteFlag.GHOST, False)
+    timer.after(900, on_after)
+    
     ArbolDeNavidad.set_position(x, y)
 
 def on_left_pressed():
@@ -39,9 +214,10 @@ def on_right_pressed():
 controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
 
 def talar_arbol():
-    sprites.destroy(ArbolDeNavidad, effects.disintegrate, 100)
+    ArbolDeNavidad.start_effect(effects.ashes, 100)
+    ArbolDeNavidad.set_flag(SpriteFlag.INVISIBLE, True)
+    ArbolDeNavidad.set_flag(SpriteFlag.GHOST, True)
     info.change_score_by(1)
-    crear_arbol()
 
 def on_down_pressed():
     animation.run_image_animation(nena,
@@ -52,17 +228,31 @@ def on_down_pressed():
         False)
 controller.down.on_event(ControllerButtonEvent.PRESSED, on_down_pressed)
 
-def on_on_overlap(sprite, otherSprite):
-    ArbolDeNavidad.say_text("Botón A talar", 500, False)
+def on_on_overlap2(sprite2, otherSprite2):
+    ArbolDeNavidad.say_text("Talar (A)", 500, False)
     if controller.A.is_pressed():
         talar_arbol()
-sprites.on_overlap(SpriteKind.player, SpriteKind.arbol, on_on_overlap)
+        if otherSprite2 == ArbolDeNavidad:
+            crear_arbol()
+sprites.on_overlap(SpriteKind.player, SpriteKind.arbol, on_on_overlap2)
 
 y = 0
 x = 0
+lista: miniMenu.MenuSprite = None
+menu = 0
+precio_actual = 0
+producto_actual = ""
 troncos = 0
 ArbolDeNavidad: Sprite = None
+Vendedor: Sprite = None
 nena: Sprite = None
+talando = False
+sobreArbol = False
+caballos = 0
+cabras = 0
+gallinas = 0
+huevos = 0
+patatas = 0
 scene.set_background_image(img("""
     8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
     8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
@@ -237,14 +427,10 @@ ArbolDeNavidad = sprites.create(img("""
     SpriteKind.arbol)
 info.set_score(troncos)
 troncos = 0
-patatas = 0
-huevos = 0
-gallinas = 0
-cabras = 0
-caballos = 0
 num_arboles = 0
-sobreArbol = False
-talando = False
+producto_actual = ""
+precio_actual = 0
+menu = 0
 nena.set_stay_in_screen(True)
 nena.set_position(10, 93)
 Vendedor.set_position(142, 96)
