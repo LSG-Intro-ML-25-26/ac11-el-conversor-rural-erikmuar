@@ -1,138 +1,132 @@
+// Erik Muñoz Arias
 namespace SpriteKind {
     export const arbol = SpriteKind.create()
     export const NPC = SpriteKind.create()
 }
-controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-up`,
-    500,
-    false
-    )
+
+controller.up.onEvent(ControllerButtonEvent.Pressed, function on_up_pressed() {
+    animation.runImageAnimation(nena, assets.animation`
+            nena-animation-up
+            `, 500, false)
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSprite) {
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function on_on_overlap(sprite: Sprite, otherSprite: Sprite) {
+    
     Vendedor.sayText("Comprar (A)", 500, false)
     if (controller.A.isPressed() && menu == 0) {
         menu = 1
-        lista = miniMenu.createMenu(
-        miniMenu.createMenuItem("Gallina", img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . b 5 5 b . . . 
-            . . . . . . b b b b b b . . . . 
-            . . . . . b b 5 5 5 5 5 b . . . 
-            . b b b b b 5 5 5 5 5 5 5 b . . 
-            . b d 5 b 5 5 5 5 5 5 5 5 b . . 
-            . . b 5 5 b 5 d 1 f 5 d 4 f . . 
-            . . b d 5 5 b 1 f f 5 4 4 c . . 
-            b b d b 5 5 5 d f b 4 4 4 4 b . 
-            b d d c d 5 5 b 5 4 4 4 4 4 4 b 
-            c d d d c c b 5 5 5 5 5 5 5 b . 
-            c b d d d d d 5 5 5 5 5 5 5 b . 
-            . c d d d d d d 5 5 5 5 5 d b . 
-            . . c b d d d d d 5 5 5 b b . . 
-            . . . c c c c c c c c b b . . . 
-            `),
-        miniMenu.createMenuItem("Patata", img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . 4 4 4 4 4 . . . . . . 
-            . . . 4 4 4 5 5 5 d 4 4 4 4 . . 
-            . . 4 d 5 d 5 5 5 d d d 4 4 . . 
-            . . 4 5 5 1 1 1 d d 5 5 5 4 . . 
-            . 4 5 5 5 1 1 1 5 1 1 5 5 4 4 . 
-            . 4 d d 1 1 5 5 5 1 1 5 5 d 4 . 
-            . 4 5 5 1 1 5 1 1 5 5 d d d 4 . 
-            . 2 5 5 5 d 1 1 1 5 1 1 5 5 2 . 
-            . 2 d 5 5 d 1 1 1 5 1 1 5 5 2 . 
-            . . 2 4 d d 5 5 5 5 d d 5 4 . . 
-            . . . 2 2 4 d 5 5 d d 4 4 . . . 
-            . . 2 2 2 2 2 4 4 4 2 2 2 . . . 
-            . . . 2 2 4 4 4 4 4 4 2 2 . . . 
-            . . . . . 2 2 2 2 2 2 . . . . . 
-            `),
-        miniMenu.createMenuItem("Cabra", img`
-            ........................
-            ........................
-            ........................
-            ........................
-            ..........ffff..........
-            ........ff1111ff........
-            .......fb111111bf.......
-            .......f11111111f.......
-            ......fd11111111df......
-            ......fd11111111df......
-            ......fddd1111dddf......
-            ......fbdbfddfbdbf......
-            ......fcdcf11fcdcf......
-            .......fb111111bf.......
-            ......fffcdb1bdffff.....
-            ....fc111cbfbfc111cf....
-            ....f1b1b1ffff1b1b1f....
-            ....fbfbffffffbfbfbf....
-            .........ffffff.........
-            ...........fff..........
-            ........................
-            ........................
-            ........................
-            ........................
-            `),
-        miniMenu.createMenuItem("Huevos", img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . b b b b . . . . . . 
-            . . . . b b 1 1 1 1 b b . . . . 
-            . . . . b 1 1 1 3 3 1 b . . . . 
-            . . . b 1 1 1 1 3 3 3 1 b . . . 
-            . . . b 1 1 3 1 1 3 3 1 b . . . 
-            . . b d 1 1 1 1 1 1 1 1 d b . . 
-            . . b d 3 3 1 1 1 1 1 1 d b . . 
-            . . b b 3 3 1 1 1 1 3 3 d b . . 
-            . . c b b d 1 1 1 3 3 b d c . . 
-            . . c d d d d d d b b b d c . . 
-            . . c b d d b b d b b d b c . . 
-            . . . c d d b b d d d d c . . . 
-            . . . . c b d d d d b c . . . . 
-            . . . . . c c c c c c . . . . . 
-            `),
-        miniMenu.createMenuItem("Caballos", img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . 6 6 6 6 6 6 6 6 . . 
-            . . . . . 6 c 6 6 6 6 6 6 9 6 . 
-            . . . . 6 c c 6 6 6 6 6 6 9 c 6 
-            . . d 6 9 c c 6 9 9 9 9 9 9 c c 
-            . d 6 6 9 c b 8 8 8 8 8 8 8 6 c 
-            . 6 6 6 9 b 8 8 b b b 8 b b 8 6 
-            . 6 6 6 6 6 8 b b b b 8 b b b 8 
-            . 6 6 6 6 8 6 6 6 6 6 8 6 6 6 8 
-            . 6 d d 6 8 f 8 8 8 f 8 8 8 8 8 
-            . d d 6 8 8 8 f 8 8 f 8 8 8 8 8 
-            . 8 8 8 8 8 8 8 f f f 8 8 8 8 8 
-            . 8 8 8 8 f f f 8 8 8 8 f f f f 
-            . . . 8 f f f f f 8 8 f f f f f 
-            . . . . f f f f . . . . f f f . 
-            . . . . . . . . . . . . . . . . 
-            `),
-        miniMenu.createMenuItem("Salir", img`
-            ...........fffffff...ccfff..........
-            ..........fbbbbbbbffcbbbbf..........
-            ..........fbb111bbbbbffbf...........
-            ..........fb11111ffbbbbff...........
-            ..........f1cccc1ffbbbbbcff.........
-            ..........ffc1c1c1bbcbcbcccf........
-            ...........fcc3331bbbcbcbcccf..ccccc
-            ............c333c1bbbcbcbccccfcddbbc
-            ............c333c1bbbbbbbcccccddbcc.
-            ............c333c11bbbbbccccccbbcc..
-            ...........cc331c11bbbbccccccfbccf..
-            ...........cc13c11cbbbcccccbbcfccf..
-            ...........c111111cbbbfdddddc.fbbcf.
-            ............cc1111fbdbbfdddc...fbbf.
-            ..............cccfffbdbbfcc.....fbbf
-            ....................fffff........fff
-            `)
-        )
-        lista.onButtonPressed(controller.A, function (selection, selectedIndex) {
+        lista = miniMenu.createMenu(miniMenu.createMenuItem("Gallina", img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . b 5 5 b . . .
+                    . . . . . . b b b b b b . . . .
+                    . . . . . b b 5 5 5 5 5 b . . .
+                    . b b b b b 5 5 5 5 5 5 5 b . .
+                    . b d 5 b 5 5 5 5 5 5 5 5 b . .
+                    . . b 5 5 b 5 d 1 f 5 d 4 f . .
+                    . . b d 5 5 b 1 f f 5 4 4 c . .
+                    b b d b 5 5 5 d f b 4 4 4 4 b .
+                    b d d c d 5 5 b 5 4 4 4 4 4 4 b
+                    c d d d c c b 5 5 5 5 5 5 5 b .
+                    c b d d d d d 5 5 5 5 5 5 5 b .
+                    . c d d d d d d 5 5 5 5 5 d b .
+                    . . c b d d d d d 5 5 5 b b . .
+                    . . . c c c c c c c c b b . . .
+                    `), miniMenu.createMenuItem("Patata", img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . 4 4 4 4 4 . . . . . .
+                    . . . 4 4 4 5 5 5 d 4 4 4 4 . .
+                    . . 4 d 5 d 5 5 5 d d d 4 4 . .
+                    . . 4 5 5 1 1 1 d d 5 5 5 4 . .
+                    . 4 5 5 5 1 1 1 5 1 1 5 5 4 4 .
+                    . 4 d d 1 1 5 5 5 1 1 5 5 d 4 .
+                    . 4 5 5 1 1 5 1 1 5 5 d d d 4 .
+                    . 2 5 5 5 d 1 1 1 5 1 1 5 5 2 .
+                    . 2 d 5 5 d 1 1 1 5 1 1 5 5 2 .
+                    . . 2 4 d d 5 5 5 5 d d 5 4 . .
+                    . . . 2 2 4 d 5 5 d d 4 4 . . .
+                    . . 2 2 2 2 2 4 4 4 2 2 2 . . .
+                    . . . 2 2 4 4 4 4 4 4 2 2 . . .
+                    . . . . . 2 2 2 2 2 2 . . . . .
+                    `), miniMenu.createMenuItem("Cabra", img`
+                    ........................
+                    ........................
+                    ........................
+                    ........................
+                    ..........ffff..........
+                    ........ff1111ff........
+                    .......fb111111bf.......
+                    .......f11111111f.......
+                    ......fd11111111df......
+                    ......fd11111111df......
+                    ......fddd1111dddf......
+                    ......fbdbfddfbdbf......
+                    ......fcdcf11fcdcf......
+                    .......fb111111bf.......
+                    ......fffcdb1bdffff.....
+                    ....fc111cbfbfc111cf....
+                    ....f1b1b1ffff1b1b1f....
+                    ....fbfbffffffbfbfbf....
+                    .........ffffff.........
+                    ...........fff..........
+                    ........................
+                    ........................
+                    ........................
+                    ........................
+                    `), miniMenu.createMenuItem("Huevos", img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . b b b b . . . . . .
+                    . . . . b b 1 1 1 1 b b . . . .
+                    . . . . b 1 1 1 3 3 1 b . . . .
+                    . . . b 1 1 1 1 3 3 3 1 b . . .
+                    . . . b 1 1 3 1 1 3 3 1 b . . .
+                    . . b d 1 1 1 1 1 1 1 1 d b . .
+                    . . b d 3 3 1 1 1 1 1 1 d b . .
+                    . . b b 3 3 1 1 1 1 3 3 d b . .
+                    . . c b b d 1 1 1 3 3 b d c . .
+                    . . c d d d d d d b b b d c . .
+                    . . c b d d b b d b b d b c . .
+                    . . . c d d b b d d d d c . . .
+                    . . . . c b d d d d b c . . . .
+                    . . . . . c c c c c c . . . . .
+                    `), miniMenu.createMenuItem("Caballos", img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . 6 6 6 6 6 6 6 6 . .
+                    . . . . . 6 c 6 6 6 6 6 6 9 6 .
+                    . . . . 6 c c 6 6 6 6 6 6 9 c 6
+                    . . d 6 9 c c 6 9 9 9 9 9 9 c c
+                    . d 6 6 9 c b 8 8 8 8 8 8 8 6 c
+                    . 6 6 6 9 b 8 8 b b b 8 b b 8 6
+                    . 6 6 6 6 6 8 b b b b 8 b b b 8
+                    . 6 6 6 6 8 6 6 6 6 6 8 6 6 6 8
+                    . 6 d d 6 8 f 8 8 8 f 8 8 8 8 8
+                    . d d 6 8 8 8 f 8 8 f 8 8 8 8 8
+                    . 8 8 8 8 8 8 8 f f f 8 8 8 8 8
+                    . 8 8 8 8 f f f 8 8 8 8 f f f f
+                    . . . 8 f f f f f 8 8 f f f f f
+                    . . . . f f f f . . . . f f f .
+                    . . . . . . . . . . . . . . . .
+                    `), miniMenu.createMenuItem("Salir", img`
+                    ...........fffffff...ccfff..........
+                    ..........fbbbbbbbffcbbbbf..........
+                    ..........fbb111bbbbbffbf...........
+                    ..........fb11111ffbbbbff...........
+                    ..........f1cccc1ffbbbbbcff.........
+                    ..........ffc1c1c1bbcbcbcccf........
+                    ...........fcc3331bbbcbcbcccf..ccccc
+                    ............c333c1bbbcbcbccccfcddbbc
+                    ............c333c1bbbbbbbcccccddbcc.
+                    ............c333c11bbbbbccccccbbcc..
+                    ...........cc331c11bbbbccccccfbccf..
+                    ...........cc13c11cbbbcccccbbcfccf..
+                    ...........c111111cbbbfdddddc.fbbcf.
+                    ............cc1111fbdbbfdddc...fbbf.
+                    ..............cccfffbdbbfcc.....fbbf
+                    ....................fffff........fff
+                    `))
+        lista.onButtonPressed(controller.A, function on_button_pressed(selection: string, selectedIndex: any) {
+            
             if (selectedIndex == 0) {
                 precio_actual = 6
                 producto_actual = selection
@@ -149,6 +143,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSpri
                 precio_actual = 12
                 producto_actual = selection
             }
+            
             if (info.score() >= precio_actual) {
                 if (selectedIndex == 0) {
                     comprar(6)
@@ -169,79 +164,80 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSpri
                     lista.close()
                     menu = 0
                 }
+                
             } else {
                 game.splash("No tienes suficiente madera")
                 lista.close()
                 menu = 0
             }
+            
         })
     }
+    
 })
-function crear_arbol () {
+function crear_arbol() {
+    
     x = randint(0, 130)
     y = randint(50, 110)
     num_arboles += 1
-    timer.after(900, function () {
+    timer.after(900, function on_after() {
         ArbolDeNavidad.setFlag(SpriteFlag.Invisible, false)
         ArbolDeNavidad.setFlag(SpriteFlag.Ghost, false)
     })
     ArbolDeNavidad.setPosition(x, y)
 }
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-left`,
-    500,
-    false
-    )
+
+controller.left.onEvent(ControllerButtonEvent.Pressed, function on_left_pressed() {
+    animation.runImageAnimation(nena, assets.animation`
+            nena-animation-left
+            `, 500, false)
 })
-function comprar (num: number) {
+function comprar(num: number) {
+    
     info.changeScoreBy(num * -1)
     game.splash("Compra realizada")
     lista.close()
     menu = 0
 }
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-right`,
-    500,
-    false
-    )
+
+controller.right.onEvent(ControllerButtonEvent.Pressed, function on_right_pressed() {
+    animation.runImageAnimation(nena, assets.animation`
+            nena-animation-right
+            `, 500, false)
 })
-function talar_arbol () {
+function talar_arbol() {
     ArbolDeNavidad.startEffect(effects.ashes, 100)
     ArbolDeNavidad.setFlag(SpriteFlag.Invisible, true)
     ArbolDeNavidad.setFlag(SpriteFlag.Ghost, true)
     info.changeScoreBy(1)
 }
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-down`,
-    500,
-    false
-    )
+
+controller.down.onEvent(ControllerButtonEvent.Pressed, function on_down_pressed() {
+    animation.runImageAnimation(nena, assets.animation`
+            nena-animation-down
+            `, 500, false)
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.arbol, function (sprite2, otherSprite2) {
+sprites.onOverlap(SpriteKind.Player, SpriteKind.arbol, function on_on_overlap2(sprite2: Sprite, otherSprite2: Sprite) {
     ArbolDeNavidad.sayText("Talar (A)", 500, false)
     if (controller.A.isPressed()) {
         talar_arbol()
         if (otherSprite2 == ArbolDeNavidad) {
             crear_arbol()
         }
+        
     }
+    
 })
 let y = 0
 let x = 0
-let lista: miniMenu.MenuSprite = null
+let lista : miniMenu.MenuSprite = null
 let menu = 0
 let precio_actual = 0
 let producto_actual = ""
 let troncos = 0
-let ArbolDeNavidad: Sprite = null
-let Vendedor: Sprite = null
-let nena: Sprite = null
+let ArbolDeNavidad : Sprite = null
+let Vendedor : Sprite = null
+let nena : Sprite = null
 let talando = false
 let sobreArbol = false
 let caballos = 0
@@ -371,52 +367,54 @@ scene.setBackgroundImage(img`
     1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
     1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
     `)
-nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
+nena = sprites.create(assets.image`
+    nena-front
+    `, SpriteKind.Player)
 controller.moveSprite(nena)
 Vendedor = sprites.create(img`
-    . . . . . f f 4 4 f f . . . . . 
-    . . . . f 5 4 5 5 4 5 f . . . . 
-    . . . f e 4 5 5 5 5 4 e f . . . 
-    . . f b 3 e 4 4 4 4 e 3 b f . . 
-    . . f 3 3 3 3 3 3 3 3 3 3 f . . 
-    . f 3 3 e b 3 e e 3 b e 3 3 f . 
-    . f 3 3 f f e e e e f f 3 3 f . 
-    . f b b f b f e e f b f b b f . 
-    . f b b e 1 f 4 4 f 1 e b b f . 
-    f f b b f 4 4 4 4 4 4 f b b f f 
-    f b b f f f e e e e f f f b b f 
-    . f e e f b d d d d b f e e f . 
-    . . e 4 c d d d d d d c 4 e . . 
-    . . e f b d b d b d b b f e . . 
-    . . . f f 1 d 1 d 1 d f f . . . 
-    . . . . . f f b b f f . . . . . 
-    `, SpriteKind.NPC)
+        . . . . . f f 4 4 f f . . . . .
+        . . . . f 5 4 5 5 4 5 f . . . .
+        . . . f e 4 5 5 5 5 4 e f . . .
+        . . f b 3 e 4 4 4 4 e 3 b f . .
+        . . f 3 3 3 3 3 3 3 3 3 3 f . .
+        . f 3 3 e b 3 e e 3 b e 3 3 f .
+        . f 3 3 f f e e e e f f 3 3 f .
+        . f b b f b f e e f b f b b f .
+        . f b b e 1 f 4 4 f 1 e b b f .
+        f f b b f 4 4 4 4 4 4 f b b f f
+        f b b f f f e e e e f f f b b f
+        . f e e f b d d d d b f e e f .
+        . . e 4 c d d d d d d c 4 e . .
+        . . e f b d b d b d b b f e . .
+        . . . f f 1 d 1 d 1 d f f . . .
+        . . . . . f f b b f f . . . . .
+        `, SpriteKind.NPC)
 ArbolDeNavidad = sprites.create(img`
-    ......cc5c......
-    .....c6555c.....
-    ....c675556c....
-    ....cc275626....
-    ...cc6c6267cc...
-    ..6c626777c26c..
-    ..c76626762776..
-    ..c6277777772c..
-    ..cc67727726cc..
-    .c67cc76676676c.
-    .c277666667772c.
-    .c6277777777266.
-    .cc7262726226666
-    c276cc6766666726
-    c727766666677276
-    cc7277777777276c
-    .c672722722767c.
-    ..cc667666766c..
-    ...ccc6c66ccc...
-    .....cccccc.....
-    .......ee.......
-    ......eeee......
-    .....eeeeee.....
-    .......ee.......
-    `, SpriteKind.arbol)
+        ......cc5c......
+        .....c6555c.....
+        ....c675556c....
+        ....cc275626....
+        ...cc6c6267cc...
+        ..6c626777c26c..
+        ..c76626762776..
+        ..c6277777772c..
+        ..cc67727726cc..
+        .c67cc76676676c.
+        .c277666667772c.
+        .c6277777777266.
+        .cc7262726226666
+        c276cc6766666726
+        c727766666677276
+        cc7277777777276c
+        .c672722722767c.
+        ..cc667666766c..
+        ...ccc6c66ccc...
+        .....cccccc.....
+        .......ee.......
+        ......eeee......
+        .....eeeeee.....
+        .......ee.......
+        `, SpriteKind.arbol)
 info.setScore(troncos)
 troncos = 0
 let num_arboles = 0

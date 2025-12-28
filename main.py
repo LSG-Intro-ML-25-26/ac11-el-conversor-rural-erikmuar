@@ -1,3 +1,4 @@
+#Erik Muñoz Arias
 @namespace
 class SpriteKind:
     arbol = SpriteKind.create()
@@ -141,7 +142,7 @@ def on_on_overlap(sprite, otherSprite):
                     """)))
         
         def on_button_pressed(selection, selectedIndex):
-            global precio_actual, producto_actual, gallinas, patatas, cabras, huevos, caballos
+            global precio_actual, producto_actual, gallinas, patatas, cabras, huevos, caballos, menu
             if selectedIndex == 0:
                 precio_actual = 6
                 producto_actual = selection
@@ -159,25 +160,27 @@ def on_on_overlap(sprite, otherSprite):
                 producto_actual = selection
             if info.score() >= precio_actual:
                 if selectedIndex == 0:
+                    comprar(6)
                     gallinas += 1
-                    game.splash("Compra realizada")
                 elif selectedIndex == 1:
+                    comprar(2)
                     patatas += 1
-                    game.splash("Compra realizada")
                 elif selectedIndex == 2:
+                    comprar(5)
                     cabras += 1
-                    game.splash("Compra realizada")
                 elif selectedIndex == 3:
+                    comprar(3)
                     huevos += 1
-                    game.splash("Compra realizada")
                 elif selectedIndex == 4:
+                    comprar(12)
                     caballos += 1
-                    game.splash("Compra realizada")
                 else:
                     lista.close()
+                    menu = 0
             else:
                 game.splash("No tienes suficiente madera")
                 lista.close()
+                menu = 0
         lista.on_button_pressed(controller.A, on_button_pressed)
         
 sprites.on_overlap(SpriteKind.player, SpriteKind.NPC, on_on_overlap)
@@ -203,6 +206,13 @@ def on_left_pressed():
         500,
         False)
 controller.left.on_event(ControllerButtonEvent.PRESSED, on_left_pressed)
+
+def comprar(num: number):
+    global menu
+    info.change_score_by(num * -1)
+    game.splash("Compra realizada")
+    lista.close()
+    menu = 0
 
 def on_right_pressed():
     animation.run_image_animation(nena,
